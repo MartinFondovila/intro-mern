@@ -25,6 +25,8 @@ initApp(appConfig, dbConfig)
 // nodemon (para actualizar el server al guardar cambios)
 // dotenv para utilizar el archivo .env y no tener hardcodedado en port
 // mongoose para facilitar la conexion y manejo de la base de datos
+// body-parser Ya esta deprecada, ahora se utiliza express
+// multer maneja el almacenamiento de las imagenes
 
 // Buscar que son las funciones async / await
 
