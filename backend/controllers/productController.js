@@ -29,6 +29,14 @@ async function addProduct(req, res) {
     }
 }
 
+// Por lo general se limitan la cantidad de resultados a mostrar en la consulta
+// pero en este caso no se toma en cuenta
+async function getProducts(req, res) {
+    const products = await Product.find().lean().exec()
+    res.status(200).send({ products })
+}
+
 module.exports = {
-    addProduct
+    addProduct,
+    getProducts
 }
