@@ -14,3 +14,25 @@ export async function getProducts () {
         console.log(e)
     }
 }
+
+export async function saveProduct (productData) {
+    try {
+        const formData = new FormData()
+
+        formData.append('name', productData.name)
+        formData.append('stock', productData.stock)
+        formData.append('price', productData.price)
+        formData.append('description', productData.description)
+        formData.append('image', productData.image)
+
+        const response = await axios({
+            url: `${baseUrl}/products`,
+            method: 'POST',
+            data: formData,
+        })
+
+        return response
+    } catch (e) {
+        console.log(e)
+    }
+}

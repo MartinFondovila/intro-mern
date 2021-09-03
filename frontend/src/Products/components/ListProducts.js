@@ -1,35 +1,29 @@
-import React, { useState, useEffect } from 'react'
-import { getProducts } from '../services'
-import Loading from './Loading'
+import React from 'react'
+import { Card, Columns, Content, Heading } from 'react-bulma-components'
 
-const ListProducts = () => {
-    const [isLoading, setIsLoading] = useState(true)
-    const [products, setProducts] = useState([])
-
-    useEffect(() => {
-        async function loadProducts () {
-            const response = await getProducts()
-            
-            if(response.status === 200) {
-                setProducts(response.data.products)
-            }
-
-            setIsLoading(false)
-        }
-
-        loadProducts()
-    }, [])
-
-    if(isLoading) {
-        return <Loading/>
-    }
-
-    if(!products.length){
-        return <h2 className="title has-text-centered">You don't have products</h2>
-    }
-
+const ListProducts = ( { products } ) => {
     return (
-        'mostrar resultado fetch'
+        <Columns>
+            {
+             products.map(({description, name, stock, _id, price, imgUrl}) =>(
+                 <Columns.Column size={3} key={_id}>
+                    <Card>
+                        <Card.Image size='16by9' src={imgUrl}/>
+                        <Card.Content>
+                            <Content>
+                                <Heading>{name}</Heading>
+                                <Heading subtitle size={6}>Price: {price}</Heading>
+                                <Heading subtitle size={6}>Stock: {stock}</Heading>
+                                <p>
+                                    {description}
+                                </p>
+                            </Content>
+                        </Card.Content>
+                    </Card>
+                 </Columns.Column>
+             ))
+            }
+        </Columns>
     )
 }
 
